@@ -320,14 +320,15 @@ section {
     border: var(--border);
 }
 
-.products .box-container .box .icons a {
+.products .box-container .box .icons a{
+    padding: .8rem;
     height: 5rem;
     width: 5rem;
     line-height: 5rem;
     font-size: 2rem;
     border: var(--border);
     color: #fff;
-    margin: 3rem;
+    margin: .4rem;
 }
 
 .products .box-container .box .icons a:hover {
