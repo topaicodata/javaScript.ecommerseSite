@@ -567,6 +567,15 @@ section {
     color: var(--bg);
 }
 
+/* Search Function */
+.product-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    text-align: center;
+    display: inline-block;
+    margin: 10px;
+}
+
 
 
 

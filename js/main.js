@@ -1,5 +1,4 @@
-//Navbar
-
+//Navbar Functionality
 let navbar = document.querySelector('.navbar');
 document.querySelector('#menu-btn').onclick = () => {
     navbar.classList.toggle('active');
@@ -25,53 +24,65 @@ window.onscroll = () => {
     
 };
 
-//SearchBar functionality
-let result = document.getElementById('result');
 
-let searchBar = document.getElementById('search-box');
-let productSearch = [];
+//SearchBar with API integration
+const searchBar = document.getElementById('searchBar');
+const result = document.getElementById('productContainer')
+// const result = document.querySelector('.box-container');
 
-
-searchBar.addEventListener('keyup', (e) => {
-    
-    let searchStr = e.target.value;
-    let filterProducts = productSearch.filter( product => {
-        return product.name.includes(searchStr);
-        
-    });
-    console.log('Filtered:', filterProducts);
-});
-
-//Fetch API data
-let loadProduct = async () => {
+async function fetchProducts() {
     try {
-        let res = await fetch('http://localhost:4400/api/data');
-        productSearch = await res.json();
-        displayProduct(productSearch);
-        console.log(productSearch);
-    } catch (err) {
-        console.error(err);
+        const response = await fetch("http://localhost:5000/api/data");
+        if (!response.ok) throw new Error("Failed to fetch products");
+
+        const data = await response.json();
+        // console.log("API response data: ", data);
+        return data;
+        // return await response.json();
+    } catch (error) {
+        console.error("Error fetch: ", error);
+        return[];
     }
-};
-
-// fetch('http://localhost:4400/api/data')
-//     .then(response => response.json())
-//     .then(data => {
-//         productSearch = data;
-//         console.log('Fetched data:', productSearch);
-//     })
-//     .catch(error => console.log('Error:', error));
-
-
-function displayResult(data) {
-    let resultList = document.getElementById('result');
-    resultList.innerHTML = "";
-    
-    data.forEach(item => {
-        let li = document.createElement('li');
-        li.textContent = item.name;
-        resultList.appendChild(li);
-    });
 }
 
 
+//Function to display searchResults
+function displayResult(filterProducts) {
+    result.innerHTML = ""; //Clear old results
+
+    if (filterProducts.length === 0) {
+        result.innerHTML = `<p> No results found </p>`;
+        return;
+    }
+
+    filterProducts.forEach(product => {
+        const box = document.createElement("div");
+        box.classList.add("box");
+
+        box.innerHTML = result;
+        result.appendChild(box);
+    });
+}
+
+//Listen for Search input
+let productSearch;
+searchBar.addEventListener('keyup', (e) => {
+    console.log(e.target.value);
+    clearTimeout(productSearch);
+
+    productSearch = setTimeout(async () => {
+        const query = searchBar.value.toLowerCase().trim();
+        // console.log("Search query:", query);
+
+        const products = await fetchProducts(); //Fetch from API
+        // console.log("Fetched Products: ", products);
+
+        const filterProducts = products.filter(product => {
+            // console.log(`"Checking product "${product.name.toLowerCase()} against query "${query}"`);
+            return product.name.toLowerCase().includes(query) //Match search input
+        });
+        // console.log("Filtered: ", filterProducts);
+
+        displayResult(filterProducts);
+    }, 300);
+});

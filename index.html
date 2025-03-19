@@ -1,29 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>T-shirt shop</title>
-
     <!-- fontawesome  -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
     <!-- Custom css file link  -->
     <link rel="stylesheet" href="css/stylesheet.css">
+</head>
 
-    <!-- Header section starts -->
+<body>
     <header class="header">
-        
-        <!-- Logo -->
         <a href="#" class="logo">
-            <img src="images/Sutra.png" alt="">
+            <img src="images/Sutra.png" alt=""> <!--LOGO HERE-->
         </a>
-
-        <!-- //Navigation -->
+        <!-- Navigation -->
         <nav class="navbar">
-
             <a href="#home">Home</a>
             <a href="#about">About</a>
             <a href="#menu">Printed Tees</a>
@@ -31,9 +24,7 @@
             <a href="#review">Review</a>
             <a href="#contact">Contact</a>
             <a href="#blogs">Blogs</a>
-
         </nav>
-    
         <!-- NavIcon btn-->
         <div class="icons">
             <i class="fa-solid fa-magnifying-glass" id="search-btn"></i>
@@ -41,63 +32,40 @@
             <!-- Responding viewport -->
             <i class="fa-solid fa-bars" id="menu-btn"></i>
         </div>
-
-        <!-- //Searchbar -->
+        <!-- Searchbar -->
         <div class="search-form">
-
-            <input type="text" id="search-box" placeholder="search here...">
-            <label for="search-box" class="fa-solid fa-magnifying-glass"></label>
-    
+            <input type="text" id="searchBar" placeholder="search here...">
+            <label for="searchBar" class="fa-solid fa-magnifying-glass"></label>
+            
+            <!-- Display filtered result -->
             <ul id="result"></ul>
-    
-        </div>
 
+        </div>
+    
         <!-- CartItem -->
         <div class="cart-items-container">
 
             <div class="cart-item">
                 <span class="fas fa-times"></span>
-                <img src="images/5001C..jpg" alt="">
+                <img src="images/5001E..jpg" alt="">
                 <div class="content">
                     <h3>cart items 01</h3>
                     <div class="price">Rs.500</div>
                 </div>
             </div>
-
+    
             <div class="cart-item">
                 <span class="fas fa-times"></span>
-                <img src="images/5001E..jpg" alt="">
+                <img src="images/8001C..jpg" alt="">
                 <div class="content">
                     <h3>cart items 02</h3>
                     <div class="price">Rs.500</div>
                 </div>
             </div>
-
-            <div class="cart-item">
-                <span class="fas fa-times"></span>
-                <img src="images/8001B..jpg" alt="">
-                <div class="content">
-                    <h3>cart items 03</h3>
-                    <div class="price">Rs.500</div>
-                </div>
-            </div>
-
-            <div class="cart-item">
-                <span class="fas fa-times"></span>
-                <img src="images/8001C..jpg" alt="">
-                <div class="content">
-                    <h3>cart items 04</h3>
-                    <div class="price">Rs.500</div>
-                </div>
-            </div>
-
+    
             <a href="#" class="btn">checkout now</a>
         </div>
-        
     </header>
-</head>
-
-<body>
 
     <!-- Home section starts  -->
     <section class="home" id="home">
@@ -182,7 +150,7 @@
     <section class="products" id="products">
         <h1 class="heading">Wholesale <span>products</span></h1>
 
-        <div class="box-container">
+        <div class="box-container" id="productContainer">
 
             <div class="box">
 
@@ -193,7 +161,7 @@
                 </div>
                 
                 <div class="image">
-                    <img src="images/Hoodiee.jpg" alt="">
+                    <img src="images/Hoodiee.jpg" alt="hoodie">
                 </div>
 
                 <div class="content">
@@ -222,7 +190,7 @@
                 </div>
 
                 <div class="image">
-                    <img src="images/Polo_tee.jpg" alt="">
+                    <img src="images/Polo_tee.jpg" alt="polo">
                 </div>
 
                 <div class="content">
@@ -324,7 +292,7 @@
                         <i class="fas fa-star-half-alt"></i>
                     </div>
 
-                    <div class="price">Rs.1800 <span>2200</span></div>
+                    <div class="price">Rs.1800 <span>Rs.2200</span></div>
                 </div>
             </div>
 
@@ -397,22 +365,22 @@
         <div class="row">
             <iframe class="map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3532.736335441642!2d85.3358044749226!3d27.69454292605712!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb1999a428e6ed%3A0x99bf5c0b9af2cab!2sFlames%20Tees!5e0!3m2!1sen!2snp!4v1703568740616!5m2!1sen!2snp" allowfullscreen="" loading="lazy"></iframe>
 
-            <form action="">
+            <form action="/api" method="post">
                 <h3>get in touch</h3>
 
                 <div class="input-box">
                     <span class="fas fa-user"></span>
-                    <input type="text" placeholder="name">
+                    <input type="text" id="contact" placeholder="name">
                 </div>
 
                 <div class="input-box">
                     <span class="fas fa-envelope"></span>
-                    <input type="text" placeholder="email">
+                    <input type="text" id="email" placeholder="email" autocomplete="1">
                 </div>
 
                 <div class="input-box">
                     <span class="fas fa-phone"></span>
-                    <input type="number" placeholder="phone">
+                    <input type="number" id="phone" placeholder="phone" autocomplete="2">
                 </div>
 
                 <input type="submit" value="contact now" class="btn">
