@@ -24,6 +24,7 @@ html {
     overflow-x: hidden;
     scroll-padding-top: 9rem;
     scroll-behavior: smooth;
+    /* background: transparent; */
 }
 
 html::-webkit-scrollbar {
@@ -40,11 +41,20 @@ html::-webkit-scrollbar-thumb {
 }
 
 body {
-    background: var(--bg);
+    min-height: 100vh;
+    background: url(../images/joggingflip.jpg) no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
 }
 
 section {
     padding: 2rem 7%;
+    transition: all 0.5s ease;
+}
+
+.hidden {
+    display: none !important;
 }
 
 .heading {
@@ -71,6 +81,63 @@ section {
 }
 
 .btn:hover {
+    letter-spacing: .2rem;
+}
+
+.homeBtn {
+    margin-top: 1rem;
+    display: inline-block;
+    padding: .9rem 3rem;
+    font-size: 1.7rem;
+    color: #fff;
+    background: var(--bg);
+    cursor: pointer;
+}
+
+.homeBtn:hover {
+    letter-spacing: .2rem;
+}
+
+.cartBtn {
+    margin-top: 1rem;
+    display: inline-block;
+    padding: .9rem 3rem;
+    font-size: 1.7rem;
+    color: #fff;
+    background: var(--bg);
+    cursor: pointer;
+}
+
+.cartBtn:hover {
+    letter-spacing: .2rem;
+}
+
+.contactBtn {
+    margin-top: 1rem;
+    display: inline-block;
+    padding: .9rem 3rem;
+    font-size: 1.7rem;
+    color: #fff;
+    background: var(--bg);
+    cursor: pointer;
+}
+
+.contactBtn:hover {
+    letter-spacing: .2rem;
+}
+
+.cBtn {
+    margin-top: 1rem;
+    display: block;
+    padding: .9rem 3rem;
+    font-size: 1.7rem;
+    color: #fff;
+    background: var(--bg);
+    cursor: pointer;
+    text-align: center;
+}
+
+.cBtn:hover {
     letter-spacing: .2rem;
 }
 
@@ -209,15 +276,36 @@ section {
 
 .home {
     min-height: 100vh;
+    /* display: none; */
+    transition: all 0.5s ease;
+    
+    position: relative;
+    width: 100%;
+    justify-content: center;
     display: flex;
     align-items: center;
-    background: url(../images/joggingflip.jpg) no-repeat;
+    /* background: #fcba03; */
+    /* background: url(../images/joggingflip.jpg) no-repeat;
     background-size: cover;
     background-position: center;
+    background-attachment: fixed; */
+}
+
+.home.expanded {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    min-height: 100vh;
 }
 
 .home .content {
     max-width: 70rem;
+
+    z-index: 888;
+    color: #fff;
+    display: block;
 }
 
 .home .content h3 {
@@ -237,7 +325,7 @@ section {
 .about .row {
     display: flex;
     align-items: center;
-    background: var(--black);
+    /* background: var(--black); */
     flex-wrap: wrap;
 }
 
@@ -427,12 +515,6 @@ section {
     flex: 1 1 45rem;
     padding: 5rem 2rem;
     text-align: center;
-}
-
-.contact .row form h3 {
-    text-transform: uppercase;
-    font-size: 3.5rem;
-    color: #fff;
 }
 
 .contact .row form .input-box {

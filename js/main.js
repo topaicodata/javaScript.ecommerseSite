@@ -1,3 +1,4 @@
+
 //Navbar Functionality
 let navbar = document.querySelector('.navbar');
 document.querySelector('#menu-btn').onclick = () => {
@@ -19,70 +20,89 @@ document.querySelector('#search-btn').onclick = () => {
 }
 window.onscroll = () => {
     navbar.classList.remove('active');
-    cartItem.classList.remove('active');
-    searchForm.classList.remove('active');
+    // cartItem.classList.remove('active');
+    // searchForm.classList.remove('active');
     
 };
 
 
 //SearchBar with API integration
 const searchBar = document.getElementById('searchBar');
-const result = document.getElementById('productContainer')
-// const result = document.querySelector('.box-container');
+const productBox = document.querySelectorAll('.box-container .box');
 
-async function fetchProducts() {
-    try {
-        const response = await fetch("http://localhost:5000/api/data");
-        if (!response.ok) throw new Error("Failed to fetch products");
-
-        const data = await response.json();
-        // console.log("API response data: ", data);
-        return data;
-        // return await response.json();
-    } catch (error) {
-        console.error("Error fetch: ", error);
-        return[];
-    }
-}
-
-
-//Function to display searchResults
-function displayResult(filterProducts) {
-    result.innerHTML = ""; //Clear old results
-
-    if (filterProducts.length === 0) {
-        result.innerHTML = `<p> No results found </p>`;
-        return;
-    }
-
-    filterProducts.forEach(product => {
-        const box = document.createElement("div");
-        box.classList.add("box");
-
-        box.innerHTML = result;
-        result.appendChild(box);
-    });
-}
-
-//Listen for Search input
-let productSearch;
 searchBar.addEventListener('keyup', (e) => {
-    console.log(e.target.value);
-    clearTimeout(productSearch);
-
-    productSearch = setTimeout(async () => {
-        const query = searchBar.value.toLowerCase().trim();
-        // console.log("Search query:", query);
-
-        const products = await fetchProducts(); //Fetch from API
-        // console.log("Fetched Products: ", products);
-
-        const filterProducts = products.filter(product => {
-            // console.log(`"Checking product "${product.name.toLowerCase()} against query "${query}"`);
-            return product.name.toLowerCase().includes(query) //Match search input
-        });
-        // console.log("Filtered: ", filterProducts);
-
-        displayResult(filterProducts);
-    }, 300);
+    const query = searchBar.value.toLowerCase().trim();
+    
+    productBox.forEach(box => {
+        const titleElement = box.querySelector('h3');
+        if (!titleElement) {
+            return;
+        }
+        
+        const productName = titleElement.textContent.toLowerCase();
+        
+        if (productName.includes(query)) {
+            box.style.display = 'block';
+        } else {
+            box.style.display = 'none';
+        }
+    });
 });
+
+
+//Cart Item
+const addCart = document.querySelectorAll('.cartBtn');
+const cartContainer = document.querySelector('#cart-container');
+
+//add item to cart
+function addToCart(product) {
+    //Create a cartitem
+    const cartItem = document.createElement('div');
+    cartItem.classList.add('cart-item');
+
+    cartItem.innerHTML = `
+    <span class="fas fa-times remove-item"></span>
+        <img src="${product.img}" alt="">
+        <div class="content">
+            <h3>${product.name}</h3>
+            <div class="price">Rs.${product.price}</div>
+        </div>
+    `;
+
+    //Append to cart container before checkout button
+    const checkoutBtn = cartContainer.querySelector('.cBtn');
+    cartContainer.insertBefore(cartItem, checkoutBtn);
+
+    //Add remove functionality
+    cartItem.querySelector('.remove-item').addEventListener('click', () => {
+        cartItem.remove();
+    });
+
+    console.log(`${product.name} added to cart!`);
+}
+
+//Listen for addToCart clicks
+addCart.forEach(button => {
+    button.addEventListener('click', (e) => {
+        e.preventDefault();
+
+        const box = button.closest('.box');
+
+        const name = box.querySelector('h3').innerText;
+        const priceT = box.querySelector('.price').innerText;
+        const img = box.querySelector('img').getAttribute('src');
+
+        const priceIn = extractPrice(priceT);
+        const product = {
+            name: name,
+            price: priceIn,
+            img: img
+        };
+        addToCart(product);
+    });
+});
+
+function extractPrice(price) {
+    const priceMatch = price.match(/Rs.\.(\d+)/);
+    return priceMatch ? parseInt(priceMatch[1]) : 0;
+}
