@@ -49,6 +49,7 @@ header .logo img {
     height: 6rem;
 }
 header {
+    padding: 4rem;
     background: var(--bg);
     display: flex;
     align-items: center;

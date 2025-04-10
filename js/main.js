@@ -229,11 +229,11 @@ window.addEventListener("scroll", () => {
 //     const formData = new FormData(form)
 //     const data = Object.fromEntries(formData.entries());
     
-//     const response = fetch("/api", {
-//         method: "POST",
-//         headers: { "Content-Type": "application/json"},
-//         body: JSON.stringify({ data })
-//     });
+    fetch("/api", {
+        method: "POST",
+        headers: { "Content-Type": "application/json"},
+        body: JSON.stringify({ contact, email, phone })
+    });
 //     const result = await response.json();
 //     alert(result.message || "Submitted" );
 // });

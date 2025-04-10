@@ -5,6 +5,11 @@ const PORT = 5000;
 
 const fs = require('fs');
 
+app.get('/favicon.ico', (req, res) => res.status(204));
+
+const favicon = require('serve-favicon');
+app.use(favicon(path.json(__dirname, 'favicon.ico')));
+
 // async function uploadFile() {
 //     const client = new ftp.Client();
 //     client.ftp.verbose = true; //Enable logs
