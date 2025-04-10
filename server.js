@@ -4,7 +4,24 @@ const app = express();
 const PORT = 5000;
 
 const fs = require('fs');
-const { message } = require("statuses");
+
+// async function uploadFile() {
+//     const client = new ftp.Client();
+//     client.ftp.verbose = true; //Enable logs
+
+//     try {
+//         await client.access({
+//             host: "flamestees.com", //FTP server address
+//             user: "bee@flamestees.com", //FTP username
+//             password: "r2K}O;iRc=%0", //FTP password
+//             secure: true, //true if server supports FTPS
+//         });
+//         console.log("Connected to FTP server");
+//     } catch (error) {
+//         console.log("FTP upload error", error);
+//     }
+// }
+// uploadFile();
 
 //Allows frontend app to request data from the backend server
 // const cors = require("cors");
@@ -19,6 +36,7 @@ app.use(express.json());
 
 //Route to handle CONTACT from submission
 app.post('/api', (req, res) => {
+
     const { contact, email, phone } = req.body;
     console.log('Received contact:', req.body);
 
@@ -70,6 +88,7 @@ app.post('/api', (req, res) => {
     });
 
 });
+
 
 
 // Start the server
